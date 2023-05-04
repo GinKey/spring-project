@@ -1,0 +1,14 @@
+.wrapper {
+    display: flex;
+}
+.block .block2{
+    display: inline-block;
+    border: 1px;
+    margin: 2px;
+}
+.block2{
+    margin-right: 50px;
+}
+h1 {
+    text-align: center;
+}

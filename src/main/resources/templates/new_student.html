@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Система работы со студентами | Добавить студента</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<blockquote class="bg-dark text-white py-3 blockquote text-center"><h1>Добавить студента факультета ИТиАБД</h1></blockquote>
+<div class="row">
+    <div class="col-md-8 offset-md-4">
+        <form action="#" th:action="@{/save}" th:object="${student}" method="post">
+            <table style="padding: 10px;">
+                <tr>
+                    <td>ID студента:</td>
+                    <td><input type="text" th:field="*{id}"></td>
+                </tr>
+                <tr>
+                    <td>Имя:</td>
+                    <td><input type="text" th:field="*{first}"></td>
+                </tr>
+                <tr>
+                    <td>Фамилия:</td>
+                    <td><input type="text" th:field="*{last}"></td>
+                </tr>
+                <tr>
+                    <td>Номер студента:</td>
+                    <td><input type="text" th:field="*{num}"></td>
+                </tr>
+                <tr>
+                    <td>Номер группы:</td>
+                    <td><input type="text" th:field="*{numgroup}"></td>
+                </tr>
+                <tr>
+                    <td>Средний балл:</td>
+                    <td><input type="text" onkeyup="this.value = this.value.replace(/\.(?=.*\.)|[^\d\.-]/g, '');"
+                               onchange="this.value = this.value.replace(/\.(?=.*\.)|[^\d\.-]/g, '');"
+                               th:field="*{av}"></td>
+                </tr>
+                <tr>
+                    <td>Проблемность</td>
+                    <td><input type="checkbox" value="присутствует" th:field="*{problemstudent}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-dark" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<footer class="bg-dark p-3" style="position: fixed; bottom: 0;">
+    <div class="d-flex justify-content-center"></div>
+    <div><br></div>
+</footer>
+</body>
+</html>

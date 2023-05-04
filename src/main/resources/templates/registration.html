@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <title>Registration Page</title>
+
+</head>
+<body>
+
+<div class="outer" style="height:70vh; width: 100%;">
+    <div class="form-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+                    <div class="form-container">
+                        <form action="/registration" method="post" class="form-horizontal">
+                            <h3 class="title">Регистрация</h3>
+                            <div class="form-group">
+                                <span class="input-icon"><i class="fa fa-user"></i></span>
+                                <input class="form-control" type="text" name="username" placeholder="Логин">
+                            </div>
+                            <div class="form-group">
+                                <span class="input-icon"><i class="fa fa-lock"></i></span>
+                                <input class="form-control" type="password" name="password" id="password" placeholder="Пароль">
+                            </div>
+                            <div class="form-group">
+                                <span class="input-icon"><i class="fa fa-lock"></i></span>
+                                <input class="form-control" type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Повторите пароль">
+                            </div>
+                            <button class="btn signin" type="submit" onclick="return validatePassword()">Вход</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validatePassword() {
+        var password = document.getElementById("password").value;
+        var passwordConfirm = document.getElementById("passwordConfirm").value;
+
+        if (password != passwordConfirm) {
+            alert("Пароли не совпадают");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>

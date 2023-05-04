@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Список пользователей</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    .container {
+      max-width: 500px;
+      margin-top: 50px;
+    }
+    .dropdown-menu {
+      background-color: black;
+    }
+    .dropdown-item {
+      color: white;
+    }
+    .table {
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+    }
+
+    .table th,
+    .table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    .table:hover {
+      outline: 2px solid blue;
+      box-shadow: 0px 0px 5px 5px
+    }
+    /* Добавленный стиль для футера */
+    footer {
+      margin-top: auto;
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
+      text-align: left; /* добавлено */
+    }
+
+    footer ul {
+      list-style: none;
+      margin: 10px 0 0 0; /* изменено */
+      padding: 0;
+      text-align: left;
+    }
+
+    footer ul li {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 0 10px; /* добавлено */
+      border-right: 1px solid #fff; /* добавлено */
+    }
+
+    footer ul li:last-child {
+      border-right: none; /* добавлено */
+    }
+
+    footer ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    footer ul li a:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+    footer h4 {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg nav-bar-light bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-white" href="/index">Главная <span class="sr-only">(текущая)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="/contact">Контакты</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Выбор действия
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/login">авторизация</a>
+          <a class="dropdown-item" href="/registration">регистрация</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout">Выход</a>
+        </div>
+      </li>
+      <li>
+        <a class="nav-link text-white" href="/index2">Обновить данные о студентах</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Поиск">
+      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Поиск</button>
+    </form>
+  </div>
+</nav>
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th>Имя</th>
+      <th>Роль</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.username}"></td>
+      <td>
+        <span th:each="role : ${user.roles}" th:text="${role}">
+            <span th:if="${!role.last}">, </span>
+        </span>
+      </td>
+      <td class="text-right">
+        <a th:href="@{/user/{id}(id=${user.id})}">
+          <button type="button" class="btn btn-info mr-1">Изменить</button>
+        </a>
+        <a th:href="@{/user/del/{id}(id=${user.id})}">
+          <button type="button" class="btn btn-danger">Удалить</button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<footer class="bg-dark text-white py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="text-left">Полезные ссылки</h4>
+        <ul class="list-unstyled text-left">
+          <li><a href="https://docs.google.com/spreadsheets/d/114tKSw7EcygY9BcS-gqnnbcC2-vTQmmAzOTzwRMKI7M/edit#gid=1148023682">Курсы на степик</a></li>
+          <li><a href="https://palchevsky.ru/uploads/pi_presentation_java.pdf">Задачи</a></li>
+          <li><a href="https://docs.google.com/spreadsheets/d/114tKSw7EcygY9BcS-gqnnbcC2-vTQmmAzOTzwRMKI7M/edit#gid=1339501739">Баллы</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
